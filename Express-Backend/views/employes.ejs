@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/../assets/css/bootstrap.min.css" />
+    <title>CRUD MongoDB</title>
+</head>
+<body>
+    <div class="container">
+        <br>
+    <div class="jumbotron">
+        <h1><%= title %></h1>
+
+        <form action="/employes/add" method="POST">
+            <legend>Créer un employé</legend>
+            <div class="form-group">
+                <input type="text" placeholder="Id pour mise à jour" id="id"  class="form-control" value="<%= txtId %>" name="id" hidden>
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="nom" id="nom"  class="form-control" value="<%= txtNom %>" name="nom">
+            </div>
+            <div class="form-group">
+                <input placeholder="prenom" class="form-control" name="prenom" rows="1" value="<%= txtPrenom %>" cols="80"></textarea>
+            </div>
+            <button class="btn btn-primary">Envoyer</button>
+        </form>
+        </div>
+
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i=0; i < employes.length; i++){ %>
+                <tr>
+                    <td><%= i+1 %></td>
+                    <td><strong><%= employes[i].nom %></strong></td>
+                    <td><strong><%= employes[i].prenom %></strong></td>
+                    <td>
+                        <a class="btn btn-success" href="/employes/select/<%= employes[i]._id %>">Selectionner</a>
+                        <a id="supprimer" class="btn btn-danger" href="/employes/delete/<%= employes[i]._id %>">Supprimer</a>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+<script>
+    document.getElementById('nom').focus();
+    document.getElementById('supprimer').addEventListener('click', (e)=>{
+        let response = confirm('Êtes-vous sur de vouloir supprimer cet employé ?');
+        if(!response){
+            e.preventDefault();
+        }
+    });
+</script>
+</body>
+</html>

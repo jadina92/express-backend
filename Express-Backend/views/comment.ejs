@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Ajouter un commentaire</h2>
+    <form action="/" method="POST">
+        <input type="text" name="title" required />
+        <input type="text" name="comment" required />
+        <button type="submit">Envoyer</button>
+    </form>
+    
+        <ul>
+            <% comments.forEach((comment) => { %>
+                <li>
+                    <strong><%= comment.title %></strong>
+                    <strong><%= comment.comment %></strong>
+                    <%= comment.date %>
+                </li>
+            <% }); %>   
+        </ul>
+    
+</body>
+
+</html>
